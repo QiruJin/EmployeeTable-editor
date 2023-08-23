@@ -7,15 +7,15 @@
 **Fields:**
 
 1. `first_name`
-   - Data Type: String
+   - Data Type: VARCHAR(50)
    - Description: First name of the employee.
    
 2. `last_name`
-   - Data Type: String
+   - Data Type: VARCHAR(50)
    - Description: Last name of the employee.
    
 3. `salary`
-   - Data Type: Integer
+   - Data Type: INT
    - Description: Salary of the employee in CAD.
 
 **Sample Data:**
