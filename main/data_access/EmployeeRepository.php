@@ -16,7 +16,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * 
      * @return array Array of employee data, containing 'first_name', 'last_name', and 'salary'
      */
-    public function getAllEmployees() {
+    public function getAllEmployees(): array{
         try {
             // SQL query to retrieve all employees from employees table
             $query = "SELECT * FROM employees";
@@ -40,7 +40,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * @param string $lastName Last name of the employee
      * @return array Employee data or null if not found
      */
-    public function getEmployeeByName($firstName, $lastName){
+    public function getEmployeeByName($firstName, $lastName): array {    
         try {
             // SQL query to retrieve an employee using their first name and last name
             $query = "SELECT * FROM employees WHERE first_name = :first_name AND last_name = :last_name";
@@ -66,7 +66,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      *              Example: ['first_name' => 'John', 'last_name' => 'Doe', 'salary' => 50000]
      * @return bool True if successful, false otherwise
      */
-    public function addEmployee($employee){
+    public function addEmployee($employee): bool{
         try {
             // SQL query to insert new employee data
             $query = "INSERT INTO employees (first_name, last_name, salary) VALUES (:first_name, :last_name, :salary)";
@@ -95,7 +95,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      *              Example: ['first_name' => 'John', 'last_name' => 'Doe', 'salary' => 50000]
      * @return bool True if successful, false otherwise
      */
-    public function updateEmployee($employee) {
+    public function updateEmployee($employee):bool {
         try {
             // SQL query to update new employee data
             $query = "UPDATE employees SET salary = :salary WHERE first_name = :first_name AND last_name = :last_name";
@@ -128,7 +128,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * @param string $lastName Last name of the employee
      * @return bool True if successful, false otherwise
      */
-    public function deleteEmployeeByName($firstName, $lastName) {
+    public function deleteEmployeeByName($firstName, $lastName):bool {
         try {
             // SQL query to delete employee data
             $query = "DELETE FROM employees WHERE first_name = :first_name AND last_name = :last_name";
