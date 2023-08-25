@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             'last_name' => $newLastName,
             'salary' => $newSalary
         ];
-        $employeeRepository->addEmployee($newEmployee);
+        $employeeRepository->updateEmployee($newEmployee);
 
         // Redirect to the employee list page
         header("Location: GetEmployeeTable.php");
