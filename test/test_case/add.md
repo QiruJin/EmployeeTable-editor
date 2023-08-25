@@ -1,0 +1,8 @@
+| Specification | Test ID | Purpose | Test Procedure | Expect Output |
+| --- | --- | --- | --- | --- |
+| Add with empty first name | R2.0 | Verify handling of empty first name during employee addition | Load the add employee page, leave the first name field empty, and submit | Stay on the current page, display an error message near the first name input field: "This is required." |
+| Add with empty last name | R2.1 | Verify handling of empty last name during employee addition | Load the add employee page, leave the last name field empty, and submit | Stay on the current page, display an error message near the last name input field: "This is required." |
+| Add with empty salary | R2.2 | Verify handling of empty salary during employee addition | Load the add employee page, leave the salary field empty, and submit | error message: "Salary must be a valid number. |
+| Add with zero salary | R2.3 | Verify handling of zero salary during employee addition | Load the add employee page, enter 0 as the salary, and submit | Database changed after successful added. |
+| Add with negative salary | R2.4 | Verify handling of negative salary during employee addition | Load the add employee page, enter a negative value as the salary, and submit | error message: "Salary must be a valid number. |
+| Successful addition | R2.5 | Verify successful addition of a new employee | Load the add employee page, enter valid first name, last name, and salary, and submit | Database changed after successful added. |
