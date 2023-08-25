@@ -1,0 +1,9 @@
+| Specification | Test ID | Purpose | Test Procedure | Expect Output |
+| :--- | :--- | :--- | :--- | :--- |
+| Edit with empty first name | R1.0 | Verify handling of empty first name during employee editing | Load the edit page, leave the first name field empty, and submit | Stay on the current page, display an error message near the first name input field: "This is required." |
+| Edit with empty last name | R1.1 | Verify handling of empty last name during employee editing | Load the edit page, leave the last name field empty, and submit | Stay on the current page, display an error message near the last name input field: "This is required |
+| Edit with empty salary | R1.2 | Verify handling of empty salary during employee editing | Load the edit page, leave the salary field empty, and submit | Stay on the current page, Error message: "Salary must be a valid number." |
+| Edit with salary as 0 | R1.3 | Verify handling of salary as 0 during employee editing | Load the edit page, enter 0 in the salary field, and submit | Employee's information is updated in the database |
+| Edit with negative salary | R1.4 | Verify handling of negative salary during employee editing | Load the edit page, enter a negative number in the salary field, and submit | Stay on the current page, Error message: "Salary must be a valid number." |
+| Edit with valid changes | R1.5 | Verify successful editing with valid input | Load the edit page, make valid changes to employee's information, and submit | Employee's information is updated in the database |
+| Edit with unchanged data | R1.6 | Verify handling when no changes are made | Load the edit page, keep all fields unchanged, and submit | No changes are made in the database |
