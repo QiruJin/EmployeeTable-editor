@@ -1,10 +1,14 @@
 <?php
 
+/**
+ * Implement Databse Connection
+ *
+ */
 class DatabaseConnection implements DatabaseConnectionInterface {
     private $host = 'localhost';
     private $dbname = 'employee_management';
-    private $username = 'your_username';
-    private $password = 'your_password';
+    private $username = 'root';
+    private $password = '';
     private $connection;
 
     public function getConnection() {

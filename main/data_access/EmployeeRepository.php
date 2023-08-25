@@ -6,8 +6,18 @@ require_once 'DatabaseConnectionInterface.php';
 class EmployeeRepository implements EmployeeRepositoryInterface {
     private $conn;
 
+    /**
+     * Build the database connection when the object is constructed
+     */
     public function __construct(DatabaseConnectionInterface $dbConnection) {
         $this->conn = $dbConnection->getConnection();
+    }
+
+    /**
+     * Close the database connection when the object is destroyed
+     */
+    public function __destruct() {
+        $this->conn = null;
     }
 
     /**
@@ -16,7 +26,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * 
      * @return array Array of employee data, containing 'first_name', 'last_name', and 'salary'
      */
-    public function getAllEmployees() {
+    public function getAllEmployees(): array{
         try {
             // SQL query to retrieve all employees from employees table
             $query = "SELECT * FROM employees";
@@ -40,7 +50,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * @param string $lastName Last name of the employee
      * @return array Employee data or null if not found
      */
-    public function getEmployeeByName($firstName, $lastName){
+    public function getEmployeeByName($firstName, $lastName): array {    
         try {
             // SQL query to retrieve an employee using their first name and last name
             $query = "SELECT * FROM employees WHERE first_name = :first_name AND last_name = :last_name";
@@ -66,8 +76,13 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      *              Example: ['first_name' => 'John', 'last_name' => 'Doe', 'salary' => 50000]
      * @return bool True if successful, false otherwise
      */
-    public function addEmployee($employee){
+    public function addEmployee($employee): bool{
         try {
+            // Check if the employee already exists
+            if ($this->employeeExists($employee['first_name'], $employee['last_name'])) {
+                echo "Employee already exists.";
+                throw new PDOException("Employee already exists.");
+            }
             // SQL query to insert new employee data
             $query = "INSERT INTO employees (first_name, last_name, salary) VALUES (:first_name, :last_name, :salary)";
             // Prepare the query statement and execute later
@@ -95,7 +110,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      *              Example: ['first_name' => 'John', 'last_name' => 'Doe', 'salary' => 50000]
      * @return bool True if successful, false otherwise
      */
-    public function updateEmployee($employee) {
+    public function updateEmployee($employee):bool {
         try {
             // SQL query to update new employee data
             $query = "UPDATE employees SET salary = :salary WHERE first_name = :first_name AND last_name = :last_name";
@@ -128,7 +143,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
      * @param string $lastName Last name of the employee
      * @return bool True if successful, false otherwise
      */
-    public function deleteEmployeeByName($firstName, $lastName) {
+    public function deleteEmployeeByName($firstName, $lastName):bool {
         try {
             // SQL query to delete employee data
             $query = "DELETE FROM employees WHERE first_name = :first_name AND last_name = :last_name";
@@ -149,6 +164,23 @@ class EmployeeRepository implements EmployeeRepositoryInterface {
             // You can also rethrow the exception to propagate it further if needed
             return false;
         }
+    }
+
+    /**
+     * Function to check if an employee with the same first name and last name already exists
+     *
+     * @param string $firstName First name of the employee
+     * @param string $lastName Last name of the employee
+     * @return bool True if an employee exists, false otherwise
+     */
+    private function employeeExists($firstName, $lastName): bool {
+        $query = "SELECT COUNT(*) FROM employees WHERE first_name = :first_name AND last_name = :last_name";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':first_name', $firstName);
+        $stmt->bindParam(':last_name', $lastName);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        return $count > 0;
     }
 }
 
