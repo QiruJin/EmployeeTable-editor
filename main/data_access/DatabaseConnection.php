@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Implement Databse Connection
+ *
+ */
 class DatabaseConnection implements DatabaseConnectionInterface {
     private $host = 'localhost';
     private $dbname = 'employee_management';
